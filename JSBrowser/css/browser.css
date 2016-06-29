@@ -1,0 +1,523 @@
+﻿*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;/*border和padding是被包含在宽高之内的。
+      内容的宽和高可以通过定义的“width”和 “height”减去相应方向的“padding”和“border”的宽度得到。
+      内容的宽和高必须保证不能为负，必要时将自动增大该元素border box的尺寸以使其内容的宽或高最小为0。*/
+}
+
+#browser {
+    z-index: 1;/*此属性参数值越大，则被层叠在最上面。*/
+}
+
+.navbar {
+    display: inline-flex ;
+
+    /*display:inline就是将元素显示为行内元素.
+　　inline元素的特点是： 
+　　和其他元素都在一行上；
+　　高，行高及顶和底边距不可改变；*/
+
+    align-items: center;
+    padding: 4px;
+    width: 100%;
+    background: linear-gradient(to bottom, #3b3b3b 0%, #222 100%);
+}
+
+.fullscreen .navbar {
+    display: none;
+}
+#urlWrap {
+    position: relative;/*相对于margin定位*/
+    margin: 0 0 0 4px;
+    height: 32px;
+    flex-grow: 1;/*扩展比例*/
+    padding-right: 35px;
+}
+
+#urlWrap > * {
+    height: 100%;
+    border-radius: 3px;/*圆角边框*/
+    font-family: 'Segoe UI', sans-serif;/*西文无衬线字体*/
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.333;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    padding-left: 35px;
+    border: 2px solid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding-right: 35px;
+}
+
+#urlInput {
+    width: 100%;
+    color: transparent;/*透明*/
+    z-index: 1;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: #eee;
+}
+#urlInput:focus {
+    border-color: #0078D7;
+    color: #666;
+}
+#urlInput:focus + #urlDisplay {
+    display: none;
+}
+
+#urlDisplay {
+    width: calc(100% - 35px);/*计算*/
+    color: #777;
+    z-index: 2;
+    pointer-events: none;/*不穿透绝对定位元素去触发下面元素的行为*/
+    border-color:  transparent;
+    white-space: nowrap; /*规定段落中的文本不进行换行：*/
+    overflow: hidden;/*超过其指定高度及宽度时隐藏*/
+}
+#urlDisplay .https {
+    color: #090;
+}
+#urlDisplay .domain {
+    color: #000;
+}
+#urlDisplay .login {
+    color: #006;
+}
+#urlDisplay:after {
+    display: block;
+    content: "";/*(撑开容器)*/
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 5%;
+    background-image: linear-gradient(to right, rgba(238,238,238,0) 0%, rgba(238,238,238,1) 100%);
+}
+
+#urlInput:focus,
+.icon:hover ~ #urlDisplay,
+#tweet:hover ~ #urlDisplay {
+    background-color: #fff;
+    color: #222;
+}
+
+.icon,
+.icon img {
+    width: 16px;
+    height: 16px;
+}
+
+.icon {
+    position: absolute;
+    top: 10px;
+    left: 115px;
+    cursor: text;/*文字鼠标*/
+    z-index: 3;
+}
+
+.icon img {
+    margin: 2px 0 0 2px;
+}
+
+.icon .ring {
+    position: relative;
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 1s ease-in-out infinite; /*动画与 div 元素绑定*/
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+
+.navButton {
+    margin-left: 4px;
+    border-radius: 3px;    
+    min-height: 0;
+    height: 30px;
+    width: 30px;
+    min-width: 0;
+    min-height: 0;
+    box-shadow: 0 4px 3px -3px #000;
+    color: #dedede;
+}
+
+.navButton,
+.navButton:disabled {
+    border: 0;
+    background: rgba(255,255,255,0.15) url('../images/icons.png') no-repeat;
+}
+
+.navButton:hover {
+    border-color: #000;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.25);
+    color: #fff;
+}
+
+.navButton:active,
+.navButton.open {
+    background-color: rgba(255,255,255,0.35);
+    color: #fff;
+}
+
+.navButton:disabled {
+    cursor: default;/*默认鼠标*/
+}
+
+.navButton:disabled:hover,
+.navButton:disabled:active,
+.navButton:disabled:focus {
+    background-color: rgba(255,255,255,0.15);
+}
+
+.backButton {
+    margin-left: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-position: -1px 0;
+}
+
+.backButton:hover,
+.backButton:active {
+    background-position: -31px 0;
+}
+
+.backButton:disabled {
+    background-position: -61px 0;
+}
+
+.forwardButton {
+    margin-left: 2px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-position: 1px -30px;
+}
+
+.forwardButton:hover,
+.forwardButton:active {
+    background-position: -29px -30px;
+}
+
+.forwardButton:disabled {
+    background-position: -59px -30px;
+}
+
+.stopButton {
+    background-position: 0 -60px;
+}
+
+.stopButton:hover,
+.stopButton:active {
+    background-position: -30px -60px;
+}
+
+.refreshButton {
+    background-position: 0 -90px;
+}
+
+.refreshButton:hover,
+.refreshButton:active {
+    background-position: -30px -90px;
+}
+
+.favButton {
+    background-position: 0 -120px;
+}
+
+.favButton:hover,
+.favButton:active {
+    background-position: -30px -120px;
+}
+
+.settingsButton {
+    background-position: 0 -150px;
+}
+
+.settingsButton:hover,
+.settingsButton:active {
+    background-position: -30px -150px;
+}
+
+#favMenu .url {
+    font-size: 12px;
+    color: #666;
+}
+
+#favMenu hr,
+#settingsMenu hr {
+    height: 1px;
+    width: auto;
+    border: 0;
+    padding: 0;
+    margin: 9px 4px;
+    background-color: #ccc;
+    vertical-align: top;/*垂直对齐文本的顶部*/
+}
+
+.favorite {
+    overflow: hidden;
+    text-overflow: ellipsis;/*文本溢出时隐藏*/
+}
+
+#favorites {
+    height: calc(100% - 168px);
+    overflow-x: hidden;/*裁剪 div 元素中内容的左/右边缘 - 如果溢出元素的内容区域的话：*/
+    overflow-y: auto;/*如果溢出框，则应该提供滚动机制。*/
+}
+
+#WebView {
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+.fullscreen #WebView {
+    height: 100%;
+}
+
+.perspective {
+	background: #aaa;
+	position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+	background: #fff;
+	min-height: 100%;
+	position: relative;
+	outline: 1px solid rgba(0,0,0,0);
+	z-index: 10;
+	transform: translateZ(0) translateX(0) rotateY(0deg);
+}
+
+.container::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0px;
+	opacity: 0;
+	background: rgba(0,0,0,0.2);
+	transition: opacity 0.4s, height 0s 0.4s;
+}
+
+.wrapper {
+	position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.component {
+	margin: 0 auto;
+	width: 60%;
+	text-align: justify;
+	font-size: 1.5em;
+}
+
+/* Modal view */
+.perspective.modalview {
+	position: fixed;
+	perspective: 1500px; /*设置元素被查看位置的视图*/
+}
+
+.modalview .container {
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.animate .container::after {
+	opacity: 1;
+	height: 100%;
+	transition: opacity 0.3s; /*不透明 3s完成*/
+}
+
+/* Outer Nav */
+.outer-nav {
+	position: absolute;
+    height: 550px;
+	font-size: 2em;
+    font-family: Segoe UI, sans-serif;
+}
+
+.outer-nav.vertical {
+	top: 50%;
+	transform: translateY(-50%);
+	transform-style: preserve-3d;
+}
+
+.outer-nav.horizontal {
+	left: 50%;
+	width: 75%;
+	max-width: 1000px;
+	text-align: center;
+	transform: translateX(-50%);
+}
+
+.outer-nav.left {
+	left: 25%;
+}
+
+.outer-nav.right {
+	right: 8%;
+    font-size: 15px;
+    width: 50%;
+    height: 75%;
+}
+
+.outer-nav.top {
+	top: 25%;
+}
+
+.outer-nav.bottom {
+	bottom: 25%;
+}
+
+.outer-nav h1 {
+    font-family: Segoe UI Light, sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.outer-nav a {
+	display: inline-block;
+	white-space: nowrap;
+	font-weight: normal;
+	margin: 0 0 30px 0;
+	color: #fff;
+	transition: color 0.3s;
+	transform-style: preserve-3d;
+    text-decoration: none;
+}
+
+.outer-nav a:hover {
+	color: #ffdccd;
+}
+
+.outer-nav.vertical a {
+	display: block;
+}
+
+.outer-nav.horizontal a {
+	margin: 15px 20px;
+}
+
+.effect-moveleft {
+    background: #f4f3f1 url("../images/logo_bg.png") no-repeat right bottom;
+}
+
+.effect-moveleft .container {
+    transition: transform 0.4s;
+    transform-origin: 50% 50%;
+}
+
+.effect-moveleft .container::after {
+    background: rgba(255,255,255,0.6);
+}
+
+.effect-moveleft.animate .container {
+    transform: translateX(-50%) rotateY(45deg) translateZ(-50px);
+}
+
+.effect-moveleft.animate .container .wrapper {
+    border: 1px solid #f4f3f1;
+}
+
+.effect-moveleft.animate x-ms-webview {
+    /* Workaround for WebView re-layout bug */
+    transform: rotateY(0deg);
+}
+
+.effect-moveleft .outer-nav * {
+    opacity: 0;
+    transform: translateX(100px) translateZ(-1000px);
+    transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-moveleft .outer-nav a {
+    color: #666;
+    padding: 15px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.effect-moveleft .outer-nav a#citation {
+    margin-top: 50px;
+    color: #BFBFBF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.effect-moveleft .outer-nav a:hover,
+.effect-moveleft .outer-nav a#citation:hover {
+    color: #222;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.effect-moveleft.animate .outer-nav * {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+}
+
+.effect-moveleft.animate .outer-nav *:nth-child(2) {
+    transition-delay: 0.03s;
+}
+
+.effect-moveleft.animate .outer-nav *:nth-child(3) {
+    transition-delay: 0.06s;
+}
+
+.effect-moveleft.animate .outer-nav *:nth-child(4) {
+    transition-delay: 0.09s;
+}
+
+.effect-moveleft.animate .outer-nav *:nth-child(5) {
+    transition-delay: 0.12s;
+}
+
+.effect-moveleft.animate .outer-nav *:nth-child(6) {
+    transition-delay: 0.15s;
+}
+
+#fullscreenMessage {
+    display: none;
+    z-index: 10;
+    width: 100%;
+    height: 80px;
+    padding: 32px;
+    position: absolute;
+    top: -80px;
+    left: 0;
+    background-color: #3B3B3B;
+    color: #FFF;
+    font-family: 'Segoe UI', sans-serif;
+    transition: 0.4s ease-in-out;
+}
+
+#fullscreenMessage.show {
+    transform: translateY(80px);
+}
+
+#fullscreenMessage a {
+    text-decoration: underline;
+    cursor: pointer;
+}
